@@ -1,0 +1,5 @@
+pytest>=8.1.2
+pytest-custom-exit-code>=0.3.0
+pip>=24.0
+setuptools>=69.5.1
+numpy>=1.26.4
