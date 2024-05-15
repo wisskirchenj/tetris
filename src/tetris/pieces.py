@@ -18,11 +18,12 @@ class Piece:
         self.rotation = 0
         self.col_offset = 0
         self.row_offset = 0
-        self.hit_bottom = False
+        self.stuck = False
 
-    def rotate(self):
+    def rotate(self, backward=False):
         self.down()
-        self.rotation = (self.rotation + 1) % len(pieces[self.key])
+        offset = -1 if backward else 1
+        self.rotation = (self.rotation + offset) % len(pieces[self.key])
 
     def right(self):
         self.down()
@@ -38,18 +39,25 @@ class Piece:
     def down(self):
         self.row_offset += 1
 
-    def shift_vertical(self, rows: int):
-        self.row_offset -= rows
-
     def call_by_command(self, command: str):
         getattr(self, command)()
+
+    def revert_command(self, command: str):
+        self.row_offset -= 1
+        match command:
+            case "left":
+                self.right()
+            case "right":
+                self.left()
+            case "rotate":
+                self.rotate(backward=True)
 
     def get_coords(self) -> list[Coord]:
         return [Coord(index // 10 + self.row_offset, index % 10 + self.col_offset)
                 for index in pieces[self.key][self.rotation]]
 
-    def set_hit_bottom(self):
-        self.hit_bottom = True
+    def set_stuck(self, stuck: bool):
+        self.stuck = stuck
 
-    def has_hit_bottom(self) -> bool:
-        return self.hit_bottom
+    def is_stuck(self) -> bool:
+        return self.stuck

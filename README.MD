@@ -27,10 +27,12 @@ Have fun!
 
 ## Project progress
 
-[//]: # (Project was completed on 29.10.23)
+Project was completed on 15.04.24
 
 27.04.24 Project started and Stage 1 completed. Introduce pieces of tetris and rotate them.
 
 28.04.24 Stage 2 and 3 completed. Implement movement for one piece chosen by user
 and variable board size. Stage 3 add boundary checks and correction.
+
+15.04.24 Stage 4 and project completed. Implement the game loop and game over condition.
 
